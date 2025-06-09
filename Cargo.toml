@@ -7,6 +7,14 @@ keywords = ["evernote", "thrift"]
 categories = ["web-programming"]
 description = "Rust bindings compiled from the Evernote IDL using thrift."
 readme = "README.md"
+repository = "https://github.com/bdkiesel/evernote.git"
+# Only include these in the published crate
+include = [
+    "src/**",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE"
+]
 
 [dependencies]
 thrift = "0.17.0"
