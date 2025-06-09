@@ -1,0 +1,14 @@
+[package]
+name = "evernote"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+keywords = ["evernote", "thrift"]
+categories = ["web-programming"]
+description = "Rust bindings compiled from the Evernote IDL using thrift."
+readme = "README.md"
+
+[dependencies]
+thrift = "0.17.0"
+
+
