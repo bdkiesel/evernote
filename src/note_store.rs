@@ -17707,7 +17707,7 @@ impl <H: NoteStoreSyncHandler> TProcessor for NoteStoreSyncProcessor<H> {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSyncStateArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreGetSyncStateArgs {
@@ -17755,13 +17755,13 @@ impl NoteStoreGetSyncStateArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSyncStateResult {
-  result_value: Option<SyncState>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<SyncState>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreGetSyncStateResult {
-  fn ok_or(self) -> thrift::Result<SyncState> {
+  pub fn ok_or(self) -> thrift::Result<SyncState> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -17779,7 +17779,7 @@ impl NoteStoreGetSyncStateResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSyncStateResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSyncStateResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<SyncState> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -17817,7 +17817,7 @@ impl NoteStoreGetSyncStateResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetSyncStateResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -17846,14 +17846,14 @@ impl NoteStoreGetSyncStateResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetFilteredSyncChunkArgs {
-  authentication_token: String,
-  after_u_s_n: i32,
-  max_entries: i32,
-  filter: SyncChunkFilter,
+  pub authentication_token: String,
+  pub after_u_s_n: i32,
+  pub max_entries: i32,
+  pub filter: SyncChunkFilter,
 }
 
 impl NoteStoreGetFilteredSyncChunkArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetFilteredSyncChunkArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetFilteredSyncChunkArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<i32> = None;
@@ -17901,7 +17901,7 @@ impl NoteStoreGetFilteredSyncChunkArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getFilteredSyncChunk_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -17927,13 +17927,13 @@ impl NoteStoreGetFilteredSyncChunkArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetFilteredSyncChunkResult {
-  result_value: Option<SyncChunk>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<SyncChunk>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreGetFilteredSyncChunkResult {
-  fn ok_or(self) -> thrift::Result<SyncChunk> {
+  pub fn ok_or(self) -> thrift::Result<SyncChunk> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -17951,7 +17951,7 @@ impl NoteStoreGetFilteredSyncChunkResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetFilteredSyncChunkResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetFilteredSyncChunkResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<SyncChunk> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -17989,7 +17989,7 @@ impl NoteStoreGetFilteredSyncChunkResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetFilteredSyncChunkResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18018,12 +18018,12 @@ impl NoteStoreGetFilteredSyncChunkResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetLinkedNotebookSyncStateArgs {
-  authentication_token: String,
-  linked_notebook: types::LinkedNotebook,
+  pub authentication_token: String,
+  pub linked_notebook: types::LinkedNotebook,
 }
 
 impl NoteStoreGetLinkedNotebookSyncStateArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncStateArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncStateArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::LinkedNotebook> = None;
@@ -18057,7 +18057,7 @@ impl NoteStoreGetLinkedNotebookSyncStateArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getLinkedNotebookSyncState_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -18077,14 +18077,14 @@ impl NoteStoreGetLinkedNotebookSyncStateArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetLinkedNotebookSyncStateResult {
-  result_value: Option<SyncState>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<SyncState>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetLinkedNotebookSyncStateResult {
-  fn ok_or(self) -> thrift::Result<SyncState> {
+  pub fn ok_or(self) -> thrift::Result<SyncState> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -18104,7 +18104,7 @@ impl NoteStoreGetLinkedNotebookSyncStateResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncStateResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncStateResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<SyncState> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -18148,7 +18148,7 @@ impl NoteStoreGetLinkedNotebookSyncStateResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetLinkedNotebookSyncStateResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18182,15 +18182,15 @@ impl NoteStoreGetLinkedNotebookSyncStateResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetLinkedNotebookSyncChunkArgs {
-  authentication_token: String,
-  linked_notebook: types::LinkedNotebook,
-  after_u_s_n: i32,
-  max_entries: i32,
-  full_sync_only: bool,
+  pub authentication_token: String,
+  pub linked_notebook: types::LinkedNotebook,
+  pub after_u_s_n: i32,
+  pub max_entries: i32,
+  pub full_sync_only: bool,
 }
 
 impl NoteStoreGetLinkedNotebookSyncChunkArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncChunkArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncChunkArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::LinkedNotebook> = None;
@@ -18245,7 +18245,7 @@ impl NoteStoreGetLinkedNotebookSyncChunkArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getLinkedNotebookSyncChunk_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -18274,14 +18274,14 @@ impl NoteStoreGetLinkedNotebookSyncChunkArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetLinkedNotebookSyncChunkResult {
-  result_value: Option<SyncChunk>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<SyncChunk>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetLinkedNotebookSyncChunkResult {
-  fn ok_or(self) -> thrift::Result<SyncChunk> {
+  pub fn ok_or(self) -> thrift::Result<SyncChunk> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -18301,7 +18301,7 @@ impl NoteStoreGetLinkedNotebookSyncChunkResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncChunkResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetLinkedNotebookSyncChunkResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<SyncChunk> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -18345,7 +18345,7 @@ impl NoteStoreGetLinkedNotebookSyncChunkResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetLinkedNotebookSyncChunkResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18379,11 +18379,11 @@ impl NoteStoreGetLinkedNotebookSyncChunkResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListNotebooksArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListNotebooksArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNotebooksArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNotebooksArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -18410,7 +18410,7 @@ impl NoteStoreListNotebooksArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listNotebooks_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -18427,9 +18427,9 @@ impl NoteStoreListNotebooksArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListNotebooksResult {
-  result_value: Option<Vec<types::Notebook>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::Notebook>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListNotebooksResult {
@@ -18528,11 +18528,11 @@ impl NoteStoreListNotebooksResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListAccessibleBusinessNotebooksArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListAccessibleBusinessNotebooksArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListAccessibleBusinessNotebooksArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListAccessibleBusinessNotebooksArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -18559,7 +18559,7 @@ impl NoteStoreListAccessibleBusinessNotebooksArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listAccessibleBusinessNotebooks_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -18576,13 +18576,13 @@ impl NoteStoreListAccessibleBusinessNotebooksArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListAccessibleBusinessNotebooksResult {
-  result_value: Option<Vec<types::Notebook>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::Notebook>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListAccessibleBusinessNotebooksResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::Notebook>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::Notebook>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -18600,7 +18600,7 @@ impl NoteStoreListAccessibleBusinessNotebooksResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListAccessibleBusinessNotebooksResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListAccessibleBusinessNotebooksResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::Notebook>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -18644,7 +18644,7 @@ impl NoteStoreListAccessibleBusinessNotebooksResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListAccessibleBusinessNotebooksResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18677,12 +18677,12 @@ impl NoteStoreListAccessibleBusinessNotebooksResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNotebookArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -18736,14 +18736,14 @@ impl NoteStoreGetNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNotebookResult {
-  result_value: Option<types::Notebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Notebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::Notebook> {
+  pub fn ok_or(self) -> thrift::Result<types::Notebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -18763,7 +18763,7 @@ impl NoteStoreGetNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Notebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -18807,7 +18807,7 @@ impl NoteStoreGetNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18841,11 +18841,11 @@ impl NoteStoreGetNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetDefaultNotebookArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreGetDefaultNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetDefaultNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetDefaultNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -18872,7 +18872,7 @@ impl NoteStoreGetDefaultNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getDefaultNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -18889,13 +18889,13 @@ impl NoteStoreGetDefaultNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetDefaultNotebookResult {
-  result_value: Option<types::Notebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::Notebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreGetDefaultNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::Notebook> {
+  pub fn ok_or(self) -> thrift::Result<types::Notebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -18913,7 +18913,7 @@ impl NoteStoreGetDefaultNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetDefaultNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetDefaultNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Notebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -18951,7 +18951,7 @@ impl NoteStoreGetDefaultNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetDefaultNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -18980,12 +18980,12 @@ impl NoteStoreGetDefaultNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateNotebookArgs {
-  authentication_token: String,
-  notebook: types::Notebook,
+  pub authentication_token: String,
+  pub notebook: types::Notebook,
 }
 
 impl NoteStoreCreateNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Notebook> = None;
@@ -19019,7 +19019,7 @@ impl NoteStoreCreateNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19039,14 +19039,14 @@ impl NoteStoreCreateNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateNotebookResult {
-  result_value: Option<types::Notebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Notebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreCreateNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::Notebook> {
+  pub fn ok_or(self) -> thrift::Result<types::Notebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19066,7 +19066,7 @@ impl NoteStoreCreateNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Notebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19110,7 +19110,7 @@ impl NoteStoreCreateNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -19144,12 +19144,12 @@ impl NoteStoreCreateNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNotebookArgs {
-  authentication_token: String,
-  notebook: types::Notebook,
+  pub authentication_token: String,
+  pub notebook: types::Notebook,
 }
 
 impl NoteStoreUpdateNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Notebook> = None;
@@ -19183,7 +19183,7 @@ impl NoteStoreUpdateNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19203,14 +19203,14 @@ impl NoteStoreUpdateNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNotebookResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUpdateNotebookResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19230,7 +19230,7 @@ impl NoteStoreUpdateNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19274,7 +19274,7 @@ impl NoteStoreUpdateNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -19308,12 +19308,12 @@ impl NoteStoreUpdateNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeNotebookArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreExpungeNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -19347,7 +19347,7 @@ impl NoteStoreExpungeNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("expungeNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19367,14 +19367,14 @@ impl NoteStoreExpungeNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeNotebookResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreExpungeNotebookResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19394,7 +19394,7 @@ impl NoteStoreExpungeNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19438,7 +19438,7 @@ impl NoteStoreExpungeNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreExpungeNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -19472,11 +19472,11 @@ impl NoteStoreExpungeNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListTagsArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListTagsArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -19503,7 +19503,7 @@ impl NoteStoreListTagsArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listTags_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19520,13 +19520,13 @@ impl NoteStoreListTagsArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListTagsResult {
-  result_value: Option<Vec<types::Tag>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::Tag>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListTagsResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::Tag>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::Tag>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19544,7 +19544,7 @@ impl NoteStoreListTagsResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::Tag>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19588,7 +19588,7 @@ impl NoteStoreListTagsResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListTagsResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -19621,12 +19621,12 @@ impl NoteStoreListTagsResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListTagsByNotebookArgs {
-  authentication_token: String,
-  notebook_guid: types::Guid,
+  pub authentication_token: String,
+  pub notebook_guid: types::Guid,
 }
 
 impl NoteStoreListTagsByNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsByNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsByNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -19660,7 +19660,7 @@ impl NoteStoreListTagsByNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listTagsByNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19680,14 +19680,14 @@ impl NoteStoreListTagsByNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListTagsByNotebookResult {
-  result_value: Option<Vec<types::Tag>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<types::Tag>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreListTagsByNotebookResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::Tag>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::Tag>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19707,7 +19707,7 @@ impl NoteStoreListTagsByNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsByNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListTagsByNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::Tag>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19757,7 +19757,7 @@ impl NoteStoreListTagsByNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListTagsByNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -19795,12 +19795,12 @@ impl NoteStoreListTagsByNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetTagArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetTagArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetTagArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetTagArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -19834,7 +19834,7 @@ impl NoteStoreGetTagArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getTag_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -19854,14 +19854,14 @@ impl NoteStoreGetTagArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetTagResult {
-  result_value: Option<types::Tag>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Tag>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetTagResult {
-  fn ok_or(self) -> thrift::Result<types::Tag> {
+  pub fn ok_or(self) -> thrift::Result<types::Tag> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -19881,7 +19881,7 @@ impl NoteStoreGetTagResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetTagResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetTagResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Tag> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -19925,7 +19925,7 @@ impl NoteStoreGetTagResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetTagResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -19959,12 +19959,12 @@ impl NoteStoreGetTagResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateTagArgs {
-  authentication_token: String,
-  tag: types::Tag,
+  pub authentication_token: String,
+  pub tag: types::Tag,
 }
 
 impl NoteStoreCreateTagArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateTagArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateTagArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Tag> = None;
@@ -19998,7 +19998,7 @@ impl NoteStoreCreateTagArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createTag_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20018,14 +20018,14 @@ impl NoteStoreCreateTagArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateTagResult {
-  result_value: Option<types::Tag>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Tag>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreCreateTagResult {
-  fn ok_or(self) -> thrift::Result<types::Tag> {
+  pub fn ok_or(self) -> thrift::Result<types::Tag> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20045,7 +20045,7 @@ impl NoteStoreCreateTagResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateTagResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateTagResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Tag> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -20089,7 +20089,7 @@ impl NoteStoreCreateTagResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateTagResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -20123,12 +20123,12 @@ impl NoteStoreCreateTagResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateTagArgs {
-  authentication_token: String,
-  tag: types::Tag,
+  pub authentication_token: String,
+  pub tag: types::Tag,
 }
 
 impl NoteStoreUpdateTagArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateTagArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateTagArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Tag> = None;
@@ -20162,7 +20162,7 @@ impl NoteStoreUpdateTagArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateTag_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20182,14 +20182,14 @@ impl NoteStoreUpdateTagArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateTagResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUpdateTagResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20209,7 +20209,7 @@ impl NoteStoreUpdateTagResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateTagResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateTagResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -20253,7 +20253,7 @@ impl NoteStoreUpdateTagResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateTagResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -20287,12 +20287,12 @@ impl NoteStoreUpdateTagResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUntagAllArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreUntagAllArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUntagAllArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUntagAllArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -20326,7 +20326,7 @@ impl NoteStoreUntagAllArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("untagAll_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20346,13 +20346,13 @@ impl NoteStoreUntagAllArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUntagAllResult {
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUntagAllResult {
-  fn ok_or(self) -> thrift::Result<()> {
+  pub fn ok_or(self) -> thrift::Result<()> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20363,7 +20363,7 @@ impl NoteStoreUntagAllResult {
       Ok(())
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUntagAllResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUntagAllResult> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<errors::EDAMUserException> = None;
     let mut f_2: Option<errors::EDAMSystemException> = None;
@@ -20401,7 +20401,7 @@ impl NoteStoreUntagAllResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUntagAllResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.user_exception {
@@ -20430,12 +20430,12 @@ impl NoteStoreUntagAllResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeTagArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreExpungeTagArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeTagArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeTagArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -20469,7 +20469,7 @@ impl NoteStoreExpungeTagArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("expungeTag_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20489,14 +20489,14 @@ impl NoteStoreExpungeTagArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeTagResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreExpungeTagResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20516,7 +20516,7 @@ impl NoteStoreExpungeTagResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeTagResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeTagResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -20560,7 +20560,7 @@ impl NoteStoreExpungeTagResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreExpungeTagResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -20594,11 +20594,11 @@ impl NoteStoreExpungeTagResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListSearchesArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListSearchesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSearchesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSearchesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -20625,7 +20625,7 @@ impl NoteStoreListSearchesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listSearches_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20642,13 +20642,13 @@ impl NoteStoreListSearchesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListSearchesResult {
-  result_value: Option<Vec<types::SavedSearch>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::SavedSearch>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListSearchesResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::SavedSearch>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::SavedSearch>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20666,7 +20666,7 @@ impl NoteStoreListSearchesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSearchesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSearchesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::SavedSearch>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -20710,7 +20710,7 @@ impl NoteStoreListSearchesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListSearchesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -20743,12 +20743,12 @@ impl NoteStoreListSearchesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSearchArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetSearchArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSearchArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSearchArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -20782,7 +20782,7 @@ impl NoteStoreGetSearchArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getSearch_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20802,14 +20802,14 @@ impl NoteStoreGetSearchArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSearchResult {
-  result_value: Option<types::SavedSearch>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::SavedSearch>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetSearchResult {
-  fn ok_or(self) -> thrift::Result<types::SavedSearch> {
+  pub fn ok_or(self) -> thrift::Result<types::SavedSearch> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20829,7 +20829,7 @@ impl NoteStoreGetSearchResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSearchResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSearchResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::SavedSearch> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -20873,7 +20873,7 @@ impl NoteStoreGetSearchResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetSearchResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -20907,12 +20907,12 @@ impl NoteStoreGetSearchResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateSearchArgs {
-  authentication_token: String,
-  search: types::SavedSearch,
+  pub authentication_token: String,
+  pub search: types::SavedSearch,
 }
 
 impl NoteStoreCreateSearchArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateSearchArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateSearchArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::SavedSearch> = None;
@@ -20946,7 +20946,7 @@ impl NoteStoreCreateSearchArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createSearch_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -20966,13 +20966,13 @@ impl NoteStoreCreateSearchArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateSearchResult {
-  result_value: Option<types::SavedSearch>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::SavedSearch>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreCreateSearchResult {
-  fn ok_or(self) -> thrift::Result<types::SavedSearch> {
+  pub fn ok_or(self) -> thrift::Result<types::SavedSearch> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -20990,7 +20990,7 @@ impl NoteStoreCreateSearchResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateSearchResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateSearchResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::SavedSearch> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21028,7 +21028,7 @@ impl NoteStoreCreateSearchResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateSearchResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -21057,12 +21057,12 @@ impl NoteStoreCreateSearchResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateSearchArgs {
-  authentication_token: String,
-  search: types::SavedSearch,
+  pub authentication_token: String,
+  pub search: types::SavedSearch,
 }
 
 impl NoteStoreUpdateSearchArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSearchArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSearchArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::SavedSearch> = None;
@@ -21096,7 +21096,7 @@ impl NoteStoreUpdateSearchArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateSearch_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -21116,14 +21116,14 @@ impl NoteStoreUpdateSearchArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateSearchResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUpdateSearchResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -21143,7 +21143,7 @@ impl NoteStoreUpdateSearchResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSearchResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSearchResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21187,7 +21187,7 @@ impl NoteStoreUpdateSearchResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateSearchResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -21221,12 +21221,12 @@ impl NoteStoreUpdateSearchResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeSearchArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreExpungeSearchArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeSearchArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeSearchArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -21260,7 +21260,7 @@ impl NoteStoreExpungeSearchArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("expungeSearch_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -21280,14 +21280,14 @@ impl NoteStoreExpungeSearchArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeSearchResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreExpungeSearchResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -21307,7 +21307,7 @@ impl NoteStoreExpungeSearchResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeSearchResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeSearchResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21351,7 +21351,7 @@ impl NoteStoreExpungeSearchResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreExpungeSearchResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -21385,13 +21385,13 @@ impl NoteStoreExpungeSearchResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNoteOffsetArgs {
-  authentication_token: String,
-  filter: NoteFilter,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub filter: NoteFilter,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreFindNoteOffsetArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteOffsetArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteOffsetArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<NoteFilter> = None;
@@ -21432,7 +21432,7 @@ impl NoteStoreFindNoteOffsetArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("findNoteOffset_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -21455,14 +21455,14 @@ impl NoteStoreFindNoteOffsetArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNoteOffsetResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreFindNoteOffsetResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -21482,7 +21482,7 @@ impl NoteStoreFindNoteOffsetResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteOffsetResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteOffsetResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21526,7 +21526,7 @@ impl NoteStoreFindNoteOffsetResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreFindNoteOffsetResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -21560,15 +21560,15 @@ impl NoteStoreFindNoteOffsetResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNotesMetadataArgs {
-  authentication_token: String,
-  filter: NoteFilter,
-  offset: i32,
-  max_notes: i32,
-  result_spec: NotesMetadataResultSpec,
+  pub authentication_token: String,
+  pub filter: NoteFilter,
+  pub offset: i32,
+  pub max_notes: i32,
+  pub result_spec: NotesMetadataResultSpec,
 }
 
 impl NoteStoreFindNotesMetadataArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNotesMetadataArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNotesMetadataArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<NoteFilter> = None;
@@ -21623,7 +21623,7 @@ impl NoteStoreFindNotesMetadataArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("findNotesMetadata_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -21652,14 +21652,14 @@ impl NoteStoreFindNotesMetadataArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNotesMetadataResult {
-  result_value: Option<NotesMetadataList>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<NotesMetadataList>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreFindNotesMetadataResult {
-  fn ok_or(self) -> thrift::Result<NotesMetadataList> {
+  pub fn ok_or(self) -> thrift::Result<NotesMetadataList> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -21679,7 +21679,7 @@ impl NoteStoreFindNotesMetadataResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNotesMetadataResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNotesMetadataResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<NotesMetadataList> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21723,7 +21723,7 @@ impl NoteStoreFindNotesMetadataResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreFindNotesMetadataResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -21757,13 +21757,13 @@ impl NoteStoreFindNotesMetadataResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNoteCountsArgs {
-  authentication_token: String,
-  filter: NoteFilter,
-  with_trash: bool,
+  pub authentication_token: String,
+  pub filter: NoteFilter,
+  pub with_trash: bool,
 }
 
 impl NoteStoreFindNoteCountsArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteCountsArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteCountsArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<NoteFilter> = None;
@@ -21804,7 +21804,7 @@ impl NoteStoreFindNoteCountsArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("findNoteCounts_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -21827,14 +21827,14 @@ impl NoteStoreFindNoteCountsArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindNoteCountsResult {
-  result_value: Option<NoteCollectionCounts>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<NoteCollectionCounts>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreFindNoteCountsResult {
-  fn ok_or(self) -> thrift::Result<NoteCollectionCounts> {
+  pub fn ok_or(self) -> thrift::Result<NoteCollectionCounts> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -21854,7 +21854,7 @@ impl NoteStoreFindNoteCountsResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteCountsResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindNoteCountsResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<NoteCollectionCounts> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -21898,7 +21898,7 @@ impl NoteStoreFindNoteCountsResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreFindNoteCountsResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -21932,13 +21932,13 @@ impl NoteStoreFindNoteCountsResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteWithResultSpecArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  result_spec: NoteResultSpec,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub result_spec: NoteResultSpec,
 }
 
 impl NoteStoreGetNoteWithResultSpecArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteWithResultSpecArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteWithResultSpecArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -21979,7 +21979,7 @@ impl NoteStoreGetNoteWithResultSpecArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteWithResultSpec_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22002,14 +22002,14 @@ impl NoteStoreGetNoteWithResultSpecArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteWithResultSpecResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteWithResultSpecResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22029,7 +22029,7 @@ impl NoteStoreGetNoteWithResultSpecResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteWithResultSpecResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteWithResultSpecResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22073,7 +22073,7 @@ impl NoteStoreGetNoteWithResultSpecResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteWithResultSpecResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -22107,16 +22107,16 @@ impl NoteStoreGetNoteWithResultSpecResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  with_content: bool,
-  with_resources_data: bool,
-  with_resources_recognition: bool,
-  with_resources_alternate_data: bool,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub with_content: bool,
+  pub with_resources_data: bool,
+  pub with_resources_recognition: bool,
+  pub with_resources_alternate_data: bool,
 }
 
 impl NoteStoreGetNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -22178,7 +22178,7 @@ impl NoteStoreGetNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22210,14 +22210,14 @@ impl NoteStoreGetNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22237,7 +22237,7 @@ impl NoteStoreGetNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22281,7 +22281,7 @@ impl NoteStoreGetNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -22315,12 +22315,12 @@ impl NoteStoreGetNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteApplicationDataArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetNoteApplicationDataArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -22354,7 +22354,7 @@ impl NoteStoreGetNoteApplicationDataArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteApplicationData_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22374,14 +22374,14 @@ impl NoteStoreGetNoteApplicationDataArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteApplicationDataResult {
-  result_value: Option<types::LazyMap>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::LazyMap>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteApplicationDataResult {
-  fn ok_or(self) -> thrift::Result<types::LazyMap> {
+  pub fn ok_or(self) -> thrift::Result<types::LazyMap> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22401,7 +22401,7 @@ impl NoteStoreGetNoteApplicationDataResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::LazyMap> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22445,7 +22445,7 @@ impl NoteStoreGetNoteApplicationDataResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteApplicationDataResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -22479,13 +22479,13 @@ impl NoteStoreGetNoteApplicationDataResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
 }
 
 impl NoteStoreGetNoteApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -22526,7 +22526,7 @@ impl NoteStoreGetNoteApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22549,14 +22549,14 @@ impl NoteStoreGetNoteApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteApplicationDataEntryResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22576,7 +22576,7 @@ impl NoteStoreGetNoteApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22620,7 +22620,7 @@ impl NoteStoreGetNoteApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -22654,14 +22654,14 @@ impl NoteStoreGetNoteApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetNoteApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
-  value: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
+  pub value: String,
 }
 
 impl NoteStoreSetNoteApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNoteApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNoteApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -22709,7 +22709,7 @@ impl NoteStoreSetNoteApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("setNoteApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22735,14 +22735,14 @@ impl NoteStoreSetNoteApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetNoteApplicationDataEntryResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreSetNoteApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22762,7 +22762,7 @@ impl NoteStoreSetNoteApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNoteApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNoteApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22806,7 +22806,7 @@ impl NoteStoreSetNoteApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreSetNoteApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -22840,13 +22840,13 @@ impl NoteStoreSetNoteApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUnsetNoteApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
 }
 
 impl NoteStoreUnsetNoteApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetNoteApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetNoteApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -22887,7 +22887,7 @@ impl NoteStoreUnsetNoteApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("unsetNoteApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -22910,14 +22910,14 @@ impl NoteStoreUnsetNoteApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUnsetNoteApplicationDataEntryResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUnsetNoteApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -22937,7 +22937,7 @@ impl NoteStoreUnsetNoteApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetNoteApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetNoteApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -22981,7 +22981,7 @@ impl NoteStoreUnsetNoteApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUnsetNoteApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -23015,12 +23015,12 @@ impl NoteStoreUnsetNoteApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteContentArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetNoteContentArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteContentArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteContentArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -23054,7 +23054,7 @@ impl NoteStoreGetNoteContentArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteContent_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23074,14 +23074,14 @@ impl NoteStoreGetNoteContentArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteContentResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteContentResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23101,7 +23101,7 @@ impl NoteStoreGetNoteContentResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteContentResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteContentResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23145,7 +23145,7 @@ impl NoteStoreGetNoteContentResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteContentResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -23179,14 +23179,14 @@ impl NoteStoreGetNoteContentResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteSearchTextArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  note_only: bool,
-  tokenize_for_indexing: bool,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub note_only: bool,
+  pub tokenize_for_indexing: bool,
 }
 
 impl NoteStoreGetNoteSearchTextArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteSearchTextArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteSearchTextArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -23234,7 +23234,7 @@ impl NoteStoreGetNoteSearchTextArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteSearchText_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23260,14 +23260,14 @@ impl NoteStoreGetNoteSearchTextArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteSearchTextResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteSearchTextResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23287,7 +23287,7 @@ impl NoteStoreGetNoteSearchTextResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteSearchTextResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteSearchTextResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23331,7 +23331,7 @@ impl NoteStoreGetNoteSearchTextResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteSearchTextResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -23365,12 +23365,12 @@ impl NoteStoreGetNoteSearchTextResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceSearchTextArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceSearchTextArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceSearchTextArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceSearchTextArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -23404,7 +23404,7 @@ impl NoteStoreGetResourceSearchTextArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceSearchText_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23424,14 +23424,14 @@ impl NoteStoreGetResourceSearchTextArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceSearchTextResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceSearchTextResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23451,7 +23451,7 @@ impl NoteStoreGetResourceSearchTextResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceSearchTextResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceSearchTextResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23495,7 +23495,7 @@ impl NoteStoreGetResourceSearchTextResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceSearchTextResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -23529,12 +23529,12 @@ impl NoteStoreGetResourceSearchTextResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteTagNamesArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetNoteTagNamesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteTagNamesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteTagNamesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -23568,7 +23568,7 @@ impl NoteStoreGetNoteTagNamesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteTagNames_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23588,14 +23588,14 @@ impl NoteStoreGetNoteTagNamesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteTagNamesResult {
-  result_value: Option<Vec<String>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<String>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteTagNamesResult {
-  fn ok_or(self) -> thrift::Result<Vec<String>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<String>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23615,7 +23615,7 @@ impl NoteStoreGetNoteTagNamesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteTagNamesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteTagNamesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<String>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23665,7 +23665,7 @@ impl NoteStoreGetNoteTagNamesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteTagNamesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -23703,12 +23703,12 @@ impl NoteStoreGetNoteTagNamesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateNoteArgs {
-  authentication_token: String,
-  note: types::Note,
+  pub authentication_token: String,
+  pub note: types::Note,
 }
 
 impl NoteStoreCreateNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Note> = None;
@@ -23742,7 +23742,7 @@ impl NoteStoreCreateNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23762,14 +23762,14 @@ impl NoteStoreCreateNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateNoteResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreCreateNoteResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23789,7 +23789,7 @@ impl NoteStoreCreateNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23833,7 +23833,7 @@ impl NoteStoreCreateNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -23867,12 +23867,12 @@ impl NoteStoreCreateNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNoteArgs {
-  authentication_token: String,
-  note: types::Note,
+  pub authentication_token: String,
+  pub note: types::Note,
 }
 
 impl NoteStoreUpdateNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Note> = None;
@@ -23906,7 +23906,7 @@ impl NoteStoreUpdateNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -23926,14 +23926,14 @@ impl NoteStoreUpdateNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNoteResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUpdateNoteResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -23953,7 +23953,7 @@ impl NoteStoreUpdateNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -23997,7 +23997,7 @@ impl NoteStoreUpdateNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -24031,12 +24031,12 @@ impl NoteStoreUpdateNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreDeleteNoteArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreDeleteNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreDeleteNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreDeleteNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24070,7 +24070,7 @@ impl NoteStoreDeleteNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("deleteNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -24090,14 +24090,14 @@ impl NoteStoreDeleteNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreDeleteNoteResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreDeleteNoteResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -24117,7 +24117,7 @@ impl NoteStoreDeleteNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreDeleteNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreDeleteNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -24161,7 +24161,7 @@ impl NoteStoreDeleteNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreDeleteNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -24195,12 +24195,12 @@ impl NoteStoreDeleteNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeNoteArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreExpungeNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24234,7 +24234,7 @@ impl NoteStoreExpungeNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("expungeNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -24254,14 +24254,14 @@ impl NoteStoreExpungeNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeNoteResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreExpungeNoteResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -24281,7 +24281,7 @@ impl NoteStoreExpungeNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -24325,7 +24325,7 @@ impl NoteStoreExpungeNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreExpungeNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -24359,13 +24359,13 @@ impl NoteStoreExpungeNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCopyNoteArgs {
-  authentication_token: String,
-  note_guid: types::Guid,
-  to_notebook_guid: types::Guid,
+  pub authentication_token: String,
+  pub note_guid: types::Guid,
+  pub to_notebook_guid: types::Guid,
 }
 
 impl NoteStoreCopyNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCopyNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCopyNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24406,7 +24406,7 @@ impl NoteStoreCopyNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("copyNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -24429,14 +24429,14 @@ impl NoteStoreCopyNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCopyNoteResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreCopyNoteResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -24456,7 +24456,7 @@ impl NoteStoreCopyNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCopyNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCopyNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -24500,7 +24500,7 @@ impl NoteStoreCopyNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCopyNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -24534,12 +24534,12 @@ impl NoteStoreCopyNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListNoteVersionsArgs {
-  authentication_token: String,
-  note_guid: types::Guid,
+  pub authentication_token: String,
+  pub note_guid: types::Guid,
 }
 
 impl NoteStoreListNoteVersionsArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNoteVersionsArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNoteVersionsArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24573,7 +24573,7 @@ impl NoteStoreListNoteVersionsArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listNoteVersions_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -24593,14 +24593,14 @@ impl NoteStoreListNoteVersionsArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListNoteVersionsResult {
-  result_value: Option<Vec<NoteVersionId>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<NoteVersionId>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreListNoteVersionsResult {
-  fn ok_or(self) -> thrift::Result<Vec<NoteVersionId>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<NoteVersionId>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -24620,7 +24620,7 @@ impl NoteStoreListNoteVersionsResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNoteVersionsResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListNoteVersionsResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<NoteVersionId>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -24670,7 +24670,7 @@ impl NoteStoreListNoteVersionsResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListNoteVersionsResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -24708,16 +24708,16 @@ impl NoteStoreListNoteVersionsResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteVersionArgs {
-  authentication_token: String,
-  note_guid: types::Guid,
-  update_sequence_num: i32,
-  with_resources_data: bool,
-  with_resources_recognition: bool,
-  with_resources_alternate_data: bool,
+  pub authentication_token: String,
+  pub note_guid: types::Guid,
+  pub update_sequence_num: i32,
+  pub with_resources_data: bool,
+  pub with_resources_recognition: bool,
+  pub with_resources_alternate_data: bool,
 }
 
 impl NoteStoreGetNoteVersionArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteVersionArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteVersionArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24779,7 +24779,7 @@ impl NoteStoreGetNoteVersionArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNoteVersion_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -24811,14 +24811,14 @@ impl NoteStoreGetNoteVersionArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNoteVersionResult {
-  result_value: Option<types::Note>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Note>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetNoteVersionResult {
-  fn ok_or(self) -> thrift::Result<types::Note> {
+  pub fn ok_or(self) -> thrift::Result<types::Note> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -24838,7 +24838,7 @@ impl NoteStoreGetNoteVersionResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteVersionResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNoteVersionResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Note> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -24882,7 +24882,7 @@ impl NoteStoreGetNoteVersionResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNoteVersionResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -24916,16 +24916,16 @@ impl NoteStoreGetNoteVersionResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  with_data: bool,
-  with_recognition: bool,
-  with_attributes: bool,
-  with_alternate_data: bool,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub with_data: bool,
+  pub with_recognition: bool,
+  pub with_attributes: bool,
+  pub with_alternate_data: bool,
 }
 
 impl NoteStoreGetResourceArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -24987,7 +24987,7 @@ impl NoteStoreGetResourceArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResource_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25019,14 +25019,14 @@ impl NoteStoreGetResourceArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceResult {
-  result_value: Option<types::Resource>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Resource>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceResult {
-  fn ok_or(self) -> thrift::Result<types::Resource> {
+  pub fn ok_or(self) -> thrift::Result<types::Resource> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25046,7 +25046,7 @@ impl NoteStoreGetResourceResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Resource> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25090,7 +25090,7 @@ impl NoteStoreGetResourceResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -25124,12 +25124,12 @@ impl NoteStoreGetResourceResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceApplicationDataArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceApplicationDataArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -25163,7 +25163,7 @@ impl NoteStoreGetResourceApplicationDataArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceApplicationData_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25183,14 +25183,14 @@ impl NoteStoreGetResourceApplicationDataArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceApplicationDataResult {
-  result_value: Option<types::LazyMap>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::LazyMap>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceApplicationDataResult {
-  fn ok_or(self) -> thrift::Result<types::LazyMap> {
+  pub fn ok_or(self) -> thrift::Result<types::LazyMap> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25210,7 +25210,7 @@ impl NoteStoreGetResourceApplicationDataResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::LazyMap> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25254,7 +25254,7 @@ impl NoteStoreGetResourceApplicationDataResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceApplicationDataResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -25288,13 +25288,13 @@ impl NoteStoreGetResourceApplicationDataResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
 }
 
 impl NoteStoreGetResourceApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -25335,7 +25335,7 @@ impl NoteStoreGetResourceApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25358,14 +25358,14 @@ impl NoteStoreGetResourceApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceApplicationDataEntryResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25385,7 +25385,7 @@ impl NoteStoreGetResourceApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25429,7 +25429,7 @@ impl NoteStoreGetResourceApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -25463,14 +25463,14 @@ impl NoteStoreGetResourceApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetResourceApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
-  value: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
+  pub value: String,
 }
 
 impl NoteStoreSetResourceApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetResourceApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetResourceApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -25518,7 +25518,7 @@ impl NoteStoreSetResourceApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("setResourceApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25544,14 +25544,14 @@ impl NoteStoreSetResourceApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetResourceApplicationDataEntryResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreSetResourceApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25571,7 +25571,7 @@ impl NoteStoreSetResourceApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetResourceApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetResourceApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25615,7 +25615,7 @@ impl NoteStoreSetResourceApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreSetResourceApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -25649,13 +25649,13 @@ impl NoteStoreSetResourceApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUnsetResourceApplicationDataEntryArgs {
-  authentication_token: String,
-  guid: types::Guid,
-  key: String,
+  pub authentication_token: String,
+  pub guid: types::Guid,
+  pub key: String,
 }
 
 impl NoteStoreUnsetResourceApplicationDataEntryArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetResourceApplicationDataEntryArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetResourceApplicationDataEntryArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -25696,7 +25696,7 @@ impl NoteStoreUnsetResourceApplicationDataEntryArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("unsetResourceApplicationDataEntry_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25719,14 +25719,14 @@ impl NoteStoreUnsetResourceApplicationDataEntryArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUnsetResourceApplicationDataEntryResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUnsetResourceApplicationDataEntryResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25746,7 +25746,7 @@ impl NoteStoreUnsetResourceApplicationDataEntryResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetResourceApplicationDataEntryResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUnsetResourceApplicationDataEntryResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25790,7 +25790,7 @@ impl NoteStoreUnsetResourceApplicationDataEntryResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUnsetResourceApplicationDataEntryResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -25824,12 +25824,12 @@ impl NoteStoreUnsetResourceApplicationDataEntryResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateResourceArgs {
-  authentication_token: String,
-  resource: types::Resource,
+  pub authentication_token: String,
+  pub resource: types::Resource,
 }
 
 impl NoteStoreUpdateResourceArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateResourceArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateResourceArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Resource> = None;
@@ -25863,7 +25863,7 @@ impl NoteStoreUpdateResourceArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateResource_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -25883,14 +25883,14 @@ impl NoteStoreUpdateResourceArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateResourceResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreUpdateResourceResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -25910,7 +25910,7 @@ impl NoteStoreUpdateResourceResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateResourceResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateResourceResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -25954,7 +25954,7 @@ impl NoteStoreUpdateResourceResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateResourceResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -25988,12 +25988,12 @@ impl NoteStoreUpdateResourceResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceDataArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceDataArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceDataArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceDataArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -26027,7 +26027,7 @@ impl NoteStoreGetResourceDataArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceData_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -26047,14 +26047,14 @@ impl NoteStoreGetResourceDataArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceDataResult {
-  result_value: Option<Vec<u8>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<u8>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceDataResult {
-  fn ok_or(self) -> thrift::Result<Vec<u8>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<u8>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -26074,7 +26074,7 @@ impl NoteStoreGetResourceDataResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceDataResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceDataResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<u8>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -26118,7 +26118,7 @@ impl NoteStoreGetResourceDataResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceDataResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -26152,16 +26152,16 @@ impl NoteStoreGetResourceDataResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceByHashArgs {
-  authentication_token: String,
-  note_guid: types::Guid,
-  content_hash: Vec<u8>,
-  with_data: bool,
-  with_recognition: bool,
-  with_alternate_data: bool,
+  pub authentication_token: String,
+  pub note_guid: types::Guid,
+  pub content_hash: Vec<u8>,
+  pub with_data: bool,
+  pub with_recognition: bool,
+  pub with_alternate_data: bool,
 }
 
 impl NoteStoreGetResourceByHashArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceByHashArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceByHashArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -26223,7 +26223,7 @@ impl NoteStoreGetResourceByHashArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceByHash_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -26255,14 +26255,14 @@ impl NoteStoreGetResourceByHashArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceByHashResult {
-  result_value: Option<types::Resource>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Resource>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceByHashResult {
-  fn ok_or(self) -> thrift::Result<types::Resource> {
+  pub fn ok_or(self) -> thrift::Result<types::Resource> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -26282,7 +26282,7 @@ impl NoteStoreGetResourceByHashResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceByHashResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceByHashResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Resource> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -26326,7 +26326,7 @@ impl NoteStoreGetResourceByHashResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceByHashResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -26360,12 +26360,12 @@ impl NoteStoreGetResourceByHashResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceRecognitionArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceRecognitionArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceRecognitionArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceRecognitionArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -26399,7 +26399,7 @@ impl NoteStoreGetResourceRecognitionArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceRecognition_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -26419,14 +26419,14 @@ impl NoteStoreGetResourceRecognitionArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceRecognitionResult {
-  result_value: Option<Vec<u8>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<u8>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceRecognitionResult {
-  fn ok_or(self) -> thrift::Result<Vec<u8>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<u8>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -26446,7 +26446,7 @@ impl NoteStoreGetResourceRecognitionResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceRecognitionResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceRecognitionResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<u8>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -26490,7 +26490,7 @@ impl NoteStoreGetResourceRecognitionResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceRecognitionResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -26524,12 +26524,12 @@ impl NoteStoreGetResourceRecognitionResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceAlternateDataArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceAlternateDataArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAlternateDataArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAlternateDataArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -26563,7 +26563,7 @@ impl NoteStoreGetResourceAlternateDataArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceAlternateData_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -26583,14 +26583,14 @@ impl NoteStoreGetResourceAlternateDataArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceAlternateDataResult {
-  result_value: Option<Vec<u8>>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<Vec<u8>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceAlternateDataResult {
-  fn ok_or(self) -> thrift::Result<Vec<u8>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<u8>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -26610,7 +26610,7 @@ impl NoteStoreGetResourceAlternateDataResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAlternateDataResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAlternateDataResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<u8>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -26654,7 +26654,7 @@ impl NoteStoreGetResourceAlternateDataResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceAlternateDataResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -26688,12 +26688,12 @@ impl NoteStoreGetResourceAlternateDataResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceAttributesArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreGetResourceAttributesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAttributesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAttributesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -26727,7 +26727,7 @@ impl NoteStoreGetResourceAttributesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getResourceAttributes_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -26747,14 +26747,14 @@ impl NoteStoreGetResourceAttributesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetResourceAttributesResult {
-  result_value: Option<types::ResourceAttributes>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::ResourceAttributes>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetResourceAttributesResult {
-  fn ok_or(self) -> thrift::Result<types::ResourceAttributes> {
+  pub fn ok_or(self) -> thrift::Result<types::ResourceAttributes> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -26774,7 +26774,7 @@ impl NoteStoreGetResourceAttributesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAttributesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetResourceAttributesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::ResourceAttributes> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -26818,7 +26818,7 @@ impl NoteStoreGetResourceAttributesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetResourceAttributesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -26852,12 +26852,12 @@ impl NoteStoreGetResourceAttributesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetPublicNotebookArgs {
-  user_id: types::UserID,
-  public_uri: String,
+  pub user_id: types::UserID,
+  pub public_uri: String,
 }
 
 impl NoteStoreGetPublicNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetPublicNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetPublicNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<types::UserID> = None;
     let mut f_2: Option<String> = None;
@@ -26891,7 +26891,7 @@ impl NoteStoreGetPublicNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getPublicNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("userId", TType::I32, 1))?;
@@ -26911,13 +26911,13 @@ impl NoteStoreGetPublicNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetPublicNotebookResult {
-  result_value: Option<types::Notebook>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<types::Notebook>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreGetPublicNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::Notebook> {
+  pub fn ok_or(self) -> thrift::Result<types::Notebook> {
     if self.system_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.system_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -26935,7 +26935,7 @@ impl NoteStoreGetPublicNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetPublicNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetPublicNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Notebook> = None;
     let mut f_1: Option<errors::EDAMSystemException> = None;
@@ -26973,7 +26973,7 @@ impl NoteStoreGetPublicNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetPublicNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -27002,13 +27002,13 @@ impl NoteStoreGetPublicNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreShareNotebookArgs {
-  authentication_token: String,
-  shared_notebook: types::SharedNotebook,
-  message: String,
+  pub authentication_token: String,
+  pub shared_notebook: types::SharedNotebook,
+  pub message: String,
 }
 
 impl NoteStoreShareNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::SharedNotebook> = None;
@@ -27049,7 +27049,7 @@ impl NoteStoreShareNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("shareNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27072,14 +27072,14 @@ impl NoteStoreShareNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreShareNotebookResult {
-  result_value: Option<types::SharedNotebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::SharedNotebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreShareNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::SharedNotebook> {
+  pub fn ok_or(self) -> thrift::Result<types::SharedNotebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27099,7 +27099,7 @@ impl NoteStoreShareNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::SharedNotebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27143,7 +27143,7 @@ impl NoteStoreShareNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreShareNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -27177,12 +27177,12 @@ impl NoteStoreShareNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateOrUpdateNotebookSharesArgs {
-  authentication_token: String,
-  share_template: NotebookShareTemplate,
+  pub authentication_token: String,
+  pub share_template: NotebookShareTemplate,
 }
 
 impl NoteStoreCreateOrUpdateNotebookSharesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateOrUpdateNotebookSharesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateOrUpdateNotebookSharesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<NotebookShareTemplate> = None;
@@ -27216,7 +27216,7 @@ impl NoteStoreCreateOrUpdateNotebookSharesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createOrUpdateNotebookShares_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27236,15 +27236,15 @@ impl NoteStoreCreateOrUpdateNotebookSharesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateOrUpdateNotebookSharesResult {
-  result_value: Option<CreateOrUpdateNotebookSharesResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  invalid_contacts_exception: Option<errors::EDAMInvalidContactsException>,
+  pub result_value: Option<CreateOrUpdateNotebookSharesResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub invalid_contacts_exception: Option<errors::EDAMInvalidContactsException>,
 }
 
 impl NoteStoreCreateOrUpdateNotebookSharesResult {
-  fn ok_or(self) -> thrift::Result<CreateOrUpdateNotebookSharesResult> {
+  pub fn ok_or(self) -> thrift::Result<CreateOrUpdateNotebookSharesResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27266,7 +27266,7 @@ impl NoteStoreCreateOrUpdateNotebookSharesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateOrUpdateNotebookSharesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateOrUpdateNotebookSharesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<CreateOrUpdateNotebookSharesResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27316,7 +27316,7 @@ impl NoteStoreCreateOrUpdateNotebookSharesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateOrUpdateNotebookSharesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -27355,12 +27355,12 @@ impl NoteStoreCreateOrUpdateNotebookSharesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateSharedNotebookArgs {
-  authentication_token: String,
-  shared_notebook: types::SharedNotebook,
+  pub authentication_token: String,
+  pub shared_notebook: types::SharedNotebook,
 }
 
 impl NoteStoreUpdateSharedNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSharedNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSharedNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::SharedNotebook> = None;
@@ -27394,7 +27394,7 @@ impl NoteStoreUpdateSharedNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateSharedNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27414,14 +27414,14 @@ impl NoteStoreUpdateSharedNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateSharedNotebookResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreUpdateSharedNotebookResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27441,7 +27441,7 @@ impl NoteStoreUpdateSharedNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSharedNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateSharedNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27485,7 +27485,7 @@ impl NoteStoreUpdateSharedNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateSharedNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -27519,13 +27519,13 @@ impl NoteStoreUpdateSharedNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetNotebookRecipientSettingsArgs {
-  authentication_token: String,
-  notebook_guid: String,
-  recipient_settings: types::NotebookRecipientSettings,
+  pub authentication_token: String,
+  pub notebook_guid: String,
+  pub recipient_settings: types::NotebookRecipientSettings,
 }
 
 impl NoteStoreSetNotebookRecipientSettingsArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNotebookRecipientSettingsArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNotebookRecipientSettingsArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<String> = None;
@@ -27566,7 +27566,7 @@ impl NoteStoreSetNotebookRecipientSettingsArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("setNotebookRecipientSettings_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27589,14 +27589,14 @@ impl NoteStoreSetNotebookRecipientSettingsArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreSetNotebookRecipientSettingsResult {
-  result_value: Option<types::Notebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::Notebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreSetNotebookRecipientSettingsResult {
-  fn ok_or(self) -> thrift::Result<types::Notebook> {
+  pub fn ok_or(self) -> thrift::Result<types::Notebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27616,7 +27616,7 @@ impl NoteStoreSetNotebookRecipientSettingsResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNotebookRecipientSettingsResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreSetNotebookRecipientSettingsResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::Notebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27660,7 +27660,7 @@ impl NoteStoreSetNotebookRecipientSettingsResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreSetNotebookRecipientSettingsResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -27694,11 +27694,11 @@ impl NoteStoreSetNotebookRecipientSettingsResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListSharedNotebooksArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListSharedNotebooksArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSharedNotebooksArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSharedNotebooksArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -27725,7 +27725,7 @@ impl NoteStoreListSharedNotebooksArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listSharedNotebooks_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27742,14 +27742,14 @@ impl NoteStoreListSharedNotebooksArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListSharedNotebooksResult {
-  result_value: Option<Vec<types::SharedNotebook>>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::SharedNotebook>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListSharedNotebooksResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::SharedNotebook>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::SharedNotebook>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27769,7 +27769,7 @@ impl NoteStoreListSharedNotebooksResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSharedNotebooksResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListSharedNotebooksResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::SharedNotebook>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27819,7 +27819,7 @@ impl NoteStoreListSharedNotebooksResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListSharedNotebooksResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -27857,12 +27857,12 @@ impl NoteStoreListSharedNotebooksResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateLinkedNotebookArgs {
-  authentication_token: String,
-  linked_notebook: types::LinkedNotebook,
+  pub authentication_token: String,
+  pub linked_notebook: types::LinkedNotebook,
 }
 
 impl NoteStoreCreateLinkedNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateLinkedNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateLinkedNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::LinkedNotebook> = None;
@@ -27896,7 +27896,7 @@ impl NoteStoreCreateLinkedNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("createLinkedNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -27916,14 +27916,14 @@ impl NoteStoreCreateLinkedNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreCreateLinkedNotebookResult {
-  result_value: Option<types::LinkedNotebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::LinkedNotebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreCreateLinkedNotebookResult {
-  fn ok_or(self) -> thrift::Result<types::LinkedNotebook> {
+  pub fn ok_or(self) -> thrift::Result<types::LinkedNotebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -27943,7 +27943,7 @@ impl NoteStoreCreateLinkedNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateLinkedNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreCreateLinkedNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::LinkedNotebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -27987,7 +27987,7 @@ impl NoteStoreCreateLinkedNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreCreateLinkedNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -28021,12 +28021,12 @@ impl NoteStoreCreateLinkedNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateLinkedNotebookArgs {
-  authentication_token: String,
-  linked_notebook: types::LinkedNotebook,
+  pub authentication_token: String,
+  pub linked_notebook: types::LinkedNotebook,
 }
 
 impl NoteStoreUpdateLinkedNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateLinkedNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateLinkedNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::LinkedNotebook> = None;
@@ -28060,7 +28060,7 @@ impl NoteStoreUpdateLinkedNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateLinkedNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -28080,14 +28080,14 @@ impl NoteStoreUpdateLinkedNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateLinkedNotebookResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreUpdateLinkedNotebookResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28107,7 +28107,7 @@ impl NoteStoreUpdateLinkedNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateLinkedNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateLinkedNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -28151,7 +28151,7 @@ impl NoteStoreUpdateLinkedNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateLinkedNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -28185,11 +28185,11 @@ impl NoteStoreUpdateLinkedNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListLinkedNotebooksArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreListLinkedNotebooksArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListLinkedNotebooksArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListLinkedNotebooksArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -28216,7 +28216,7 @@ impl NoteStoreListLinkedNotebooksArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("listLinkedNotebooks_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -28233,14 +28233,14 @@ impl NoteStoreListLinkedNotebooksArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreListLinkedNotebooksResult {
-  result_value: Option<Vec<types::LinkedNotebook>>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<Vec<types::LinkedNotebook>>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreListLinkedNotebooksResult {
-  fn ok_or(self) -> thrift::Result<Vec<types::LinkedNotebook>> {
+  pub fn ok_or(self) -> thrift::Result<Vec<types::LinkedNotebook>> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28260,7 +28260,7 @@ impl NoteStoreListLinkedNotebooksResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListLinkedNotebooksResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreListLinkedNotebooksResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<Vec<types::LinkedNotebook>> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -28310,7 +28310,7 @@ impl NoteStoreListLinkedNotebooksResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreListLinkedNotebooksResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -28348,12 +28348,12 @@ impl NoteStoreListLinkedNotebooksResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeLinkedNotebookArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreExpungeLinkedNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeLinkedNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeLinkedNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -28387,7 +28387,7 @@ impl NoteStoreExpungeLinkedNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("expungeLinkedNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -28407,14 +28407,14 @@ impl NoteStoreExpungeLinkedNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreExpungeLinkedNotebookResult {
-  result_value: Option<i32>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<i32>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreExpungeLinkedNotebookResult {
-  fn ok_or(self) -> thrift::Result<i32> {
+  pub fn ok_or(self) -> thrift::Result<i32> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28434,7 +28434,7 @@ impl NoteStoreExpungeLinkedNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeLinkedNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreExpungeLinkedNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<i32> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -28478,7 +28478,7 @@ impl NoteStoreExpungeLinkedNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreExpungeLinkedNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(fld_var) = self.result_value {
@@ -28512,12 +28512,12 @@ impl NoteStoreExpungeLinkedNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreAuthenticateToSharedNotebookArgs {
-  share_key_or_global_id: String,
-  authentication_token: String,
+  pub share_key_or_global_id: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreAuthenticateToSharedNotebookArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNotebookArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNotebookArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<String> = None;
@@ -28551,7 +28551,7 @@ impl NoteStoreAuthenticateToSharedNotebookArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("authenticateToSharedNotebook_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("shareKeyOrGlobalId", TType::String, 1))?;
@@ -28571,14 +28571,14 @@ impl NoteStoreAuthenticateToSharedNotebookArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreAuthenticateToSharedNotebookResult {
-  result_value: Option<user_store::AuthenticationResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<user_store::AuthenticationResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreAuthenticateToSharedNotebookResult {
-  fn ok_or(self) -> thrift::Result<user_store::AuthenticationResult> {
+  pub fn ok_or(self) -> thrift::Result<user_store::AuthenticationResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28598,7 +28598,7 @@ impl NoteStoreAuthenticateToSharedNotebookResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNotebookResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNotebookResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<user_store::AuthenticationResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -28642,7 +28642,7 @@ impl NoteStoreAuthenticateToSharedNotebookResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreAuthenticateToSharedNotebookResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -28676,11 +28676,11 @@ impl NoteStoreAuthenticateToSharedNotebookResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSharedNotebookByAuthArgs {
-  authentication_token: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreGetSharedNotebookByAuthArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSharedNotebookByAuthArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSharedNotebookByAuthArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     loop {
@@ -28707,7 +28707,7 @@ impl NoteStoreGetSharedNotebookByAuthArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getSharedNotebookByAuth_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -28724,14 +28724,14 @@ impl NoteStoreGetSharedNotebookByAuthArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetSharedNotebookByAuthResult {
-  result_value: Option<types::SharedNotebook>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<types::SharedNotebook>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreGetSharedNotebookByAuthResult {
-  fn ok_or(self) -> thrift::Result<types::SharedNotebook> {
+  pub fn ok_or(self) -> thrift::Result<types::SharedNotebook> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28751,7 +28751,7 @@ impl NoteStoreGetSharedNotebookByAuthResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSharedNotebookByAuthResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetSharedNotebookByAuthResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<types::SharedNotebook> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -28795,7 +28795,7 @@ impl NoteStoreGetSharedNotebookByAuthResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetSharedNotebookByAuthResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -28829,12 +28829,12 @@ impl NoteStoreGetSharedNotebookByAuthResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreEmailNoteArgs {
-  authentication_token: String,
-  parameters: NoteEmailParameters,
+  pub authentication_token: String,
+  pub parameters: NoteEmailParameters,
 }
 
 impl NoteStoreEmailNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreEmailNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreEmailNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<NoteEmailParameters> = None;
@@ -28868,7 +28868,7 @@ impl NoteStoreEmailNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("emailNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -28888,13 +28888,13 @@ impl NoteStoreEmailNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreEmailNoteResult {
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreEmailNoteResult {
-  fn ok_or(self) -> thrift::Result<()> {
+  pub fn ok_or(self) -> thrift::Result<()> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -28905,7 +28905,7 @@ impl NoteStoreEmailNoteResult {
       Ok(())
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreEmailNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreEmailNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<errors::EDAMUserException> = None;
     let mut f_2: Option<errors::EDAMNotFoundException> = None;
@@ -28943,7 +28943,7 @@ impl NoteStoreEmailNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreEmailNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.user_exception {
@@ -28972,12 +28972,12 @@ impl NoteStoreEmailNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreShareNoteArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreShareNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -29011,7 +29011,7 @@ impl NoteStoreShareNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("shareNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -29031,14 +29031,14 @@ impl NoteStoreShareNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreShareNoteResult {
-  result_value: Option<String>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<String>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreShareNoteResult {
-  fn ok_or(self) -> thrift::Result<String> {
+  pub fn ok_or(self) -> thrift::Result<String> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -29058,7 +29058,7 @@ impl NoteStoreShareNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreShareNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<String> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -29102,7 +29102,7 @@ impl NoteStoreShareNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreShareNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -29136,12 +29136,12 @@ impl NoteStoreShareNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreStopSharingNoteArgs {
-  authentication_token: String,
-  guid: types::Guid,
+  pub authentication_token: String,
+  pub guid: types::Guid,
 }
 
 impl NoteStoreStopSharingNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreStopSharingNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreStopSharingNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Guid> = None;
@@ -29175,7 +29175,7 @@ impl NoteStoreStopSharingNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("stopSharingNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -29195,13 +29195,13 @@ impl NoteStoreStopSharingNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreStopSharingNoteResult {
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreStopSharingNoteResult {
-  fn ok_or(self) -> thrift::Result<()> {
+  pub fn ok_or(self) -> thrift::Result<()> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -29212,7 +29212,7 @@ impl NoteStoreStopSharingNoteResult {
       Ok(())
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreStopSharingNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreStopSharingNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<errors::EDAMUserException> = None;
     let mut f_2: Option<errors::EDAMNotFoundException> = None;
@@ -29250,7 +29250,7 @@ impl NoteStoreStopSharingNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreStopSharingNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.user_exception {
@@ -29279,13 +29279,13 @@ impl NoteStoreStopSharingNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreAuthenticateToSharedNoteArgs {
-  guid: String,
-  note_key: String,
-  authentication_token: String,
+  pub guid: String,
+  pub note_key: String,
+  pub authentication_token: String,
 }
 
 impl NoteStoreAuthenticateToSharedNoteArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNoteArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNoteArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<String> = None;
@@ -29326,7 +29326,7 @@ impl NoteStoreAuthenticateToSharedNoteArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("authenticateToSharedNote_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("guid", TType::String, 1))?;
@@ -29349,14 +29349,14 @@ impl NoteStoreAuthenticateToSharedNoteArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreAuthenticateToSharedNoteResult {
-  result_value: Option<user_store::AuthenticationResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<user_store::AuthenticationResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreAuthenticateToSharedNoteResult {
-  fn ok_or(self) -> thrift::Result<user_store::AuthenticationResult> {
+  pub fn ok_or(self) -> thrift::Result<user_store::AuthenticationResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -29376,7 +29376,7 @@ impl NoteStoreAuthenticateToSharedNoteResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNoteResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreAuthenticateToSharedNoteResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<user_store::AuthenticationResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -29420,7 +29420,7 @@ impl NoteStoreAuthenticateToSharedNoteResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreAuthenticateToSharedNoteResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -29454,13 +29454,13 @@ impl NoteStoreAuthenticateToSharedNoteResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindRelatedArgs {
-  authentication_token: String,
-  query: RelatedQuery,
-  result_spec: RelatedResultSpec,
+  pub authentication_token: String,
+  pub query: RelatedQuery,
+  pub result_spec: RelatedResultSpec,
 }
 
 impl NoteStoreFindRelatedArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindRelatedArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindRelatedArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<RelatedQuery> = None;
@@ -29501,7 +29501,7 @@ impl NoteStoreFindRelatedArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("findRelated_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -29524,14 +29524,14 @@ impl NoteStoreFindRelatedArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreFindRelatedResult {
-  result_value: Option<RelatedResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  system_exception: Option<errors::EDAMSystemException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub result_value: Option<RelatedResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
 }
 
 impl NoteStoreFindRelatedResult {
-  fn ok_or(self) -> thrift::Result<RelatedResult> {
+  pub fn ok_or(self) -> thrift::Result<RelatedResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.system_exception.is_some() {
@@ -29551,7 +29551,7 @@ impl NoteStoreFindRelatedResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindRelatedResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreFindRelatedResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<RelatedResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -29595,7 +29595,7 @@ impl NoteStoreFindRelatedResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreFindRelatedResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -29629,12 +29629,12 @@ impl NoteStoreFindRelatedResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNoteIfUsnMatchesArgs {
-  authentication_token: String,
-  note: types::Note,
+  pub authentication_token: String,
+  pub note: types::Note,
 }
 
 impl NoteStoreUpdateNoteIfUsnMatchesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteIfUsnMatchesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteIfUsnMatchesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<types::Note> = None;
@@ -29668,7 +29668,7 @@ impl NoteStoreUpdateNoteIfUsnMatchesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("updateNoteIfUsnMatches_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -29688,14 +29688,14 @@ impl NoteStoreUpdateNoteIfUsnMatchesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreUpdateNoteIfUsnMatchesResult {
-  result_value: Option<UpdateNoteIfUsnMatchesResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<UpdateNoteIfUsnMatchesResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreUpdateNoteIfUsnMatchesResult {
-  fn ok_or(self) -> thrift::Result<UpdateNoteIfUsnMatchesResult> {
+  pub fn ok_or(self) -> thrift::Result<UpdateNoteIfUsnMatchesResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -29715,7 +29715,7 @@ impl NoteStoreUpdateNoteIfUsnMatchesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteIfUsnMatchesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreUpdateNoteIfUsnMatchesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<UpdateNoteIfUsnMatchesResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -29759,7 +29759,7 @@ impl NoteStoreUpdateNoteIfUsnMatchesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreUpdateNoteIfUsnMatchesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -29793,12 +29793,12 @@ impl NoteStoreUpdateNoteIfUsnMatchesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreManageNotebookSharesArgs {
-  authentication_token: String,
-  parameters: ManageNotebookSharesParameters,
+  pub authentication_token: String,
+  pub parameters: ManageNotebookSharesParameters,
 }
 
 impl NoteStoreManageNotebookSharesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreManageNotebookSharesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreManageNotebookSharesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<ManageNotebookSharesParameters> = None;
@@ -29832,7 +29832,7 @@ impl NoteStoreManageNotebookSharesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("manageNotebookShares_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -29852,14 +29852,14 @@ impl NoteStoreManageNotebookSharesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreManageNotebookSharesResult {
-  result_value: Option<ManageNotebookSharesResult>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<ManageNotebookSharesResult>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreManageNotebookSharesResult {
-  fn ok_or(self) -> thrift::Result<ManageNotebookSharesResult> {
+  pub fn ok_or(self) -> thrift::Result<ManageNotebookSharesResult> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -29879,7 +29879,7 @@ impl NoteStoreManageNotebookSharesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreManageNotebookSharesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreManageNotebookSharesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<ManageNotebookSharesResult> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -29923,7 +29923,7 @@ impl NoteStoreManageNotebookSharesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreManageNotebookSharesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
@@ -29957,12 +29957,12 @@ impl NoteStoreManageNotebookSharesResult {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNotebookSharesArgs {
-  authentication_token: String,
-  notebook_guid: String,
+  pub authentication_token: String,
+  pub notebook_guid: String,
 }
 
 impl NoteStoreGetNotebookSharesArgs {
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookSharesArgs> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookSharesArgs> {
     i_prot.read_struct_begin()?;
     let mut f_1: Option<String> = None;
     let mut f_2: Option<String> = None;
@@ -29996,7 +29996,7 @@ impl NoteStoreGetNotebookSharesArgs {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("getNotebookShares_args");
     o_prot.write_struct_begin(&struct_ident)?;
     o_prot.write_field_begin(&TFieldIdentifier::new("authenticationToken", TType::String, 1))?;
@@ -30016,14 +30016,14 @@ impl NoteStoreGetNotebookSharesArgs {
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct NoteStoreGetNotebookSharesResult {
-  result_value: Option<ShareRelationships>,
-  user_exception: Option<errors::EDAMUserException>,
-  not_found_exception: Option<errors::EDAMNotFoundException>,
-  system_exception: Option<errors::EDAMSystemException>,
+  pub result_value: Option<ShareRelationships>,
+  pub user_exception: Option<errors::EDAMUserException>,
+  pub not_found_exception: Option<errors::EDAMNotFoundException>,
+  pub system_exception: Option<errors::EDAMSystemException>,
 }
 
 impl NoteStoreGetNotebookSharesResult {
-  fn ok_or(self) -> thrift::Result<ShareRelationships> {
+  pub fn ok_or(self) -> thrift::Result<ShareRelationships> {
     if self.user_exception.is_some() {
       Err(thrift::Error::User(Box::new(self.user_exception.unwrap())))
     } else if self.not_found_exception.is_some() {
@@ -30043,7 +30043,7 @@ impl NoteStoreGetNotebookSharesResult {
       )
     }
   }
-  fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookSharesResult> {
+  pub fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> thrift::Result<NoteStoreGetNotebookSharesResult> {
     i_prot.read_struct_begin()?;
     let mut f_0: Option<ShareRelationships> = None;
     let mut f_1: Option<errors::EDAMUserException> = None;
@@ -30087,7 +30087,7 @@ impl NoteStoreGetNotebookSharesResult {
     };
     Ok(ret)
   }
-  fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
+  pub fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> thrift::Result<()> {
     let struct_ident = TStructIdentifier::new("NoteStoreGetNotebookSharesResult");
     o_prot.write_struct_begin(&struct_ident)?;
     if let Some(ref fld_var) = self.result_value {
