@@ -17706,7 +17706,7 @@ impl <H: NoteStoreSyncHandler> TProcessor for NoteStoreSyncProcessor<H> {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSyncStateArgs {
+pub struct NoteStoreGetSyncStateArgs {
   authentication_token: String,
 }
 
@@ -17754,7 +17754,7 @@ impl NoteStoreGetSyncStateArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSyncStateResult {
+pub struct NoteStoreGetSyncStateResult {
   result_value: Option<SyncState>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -17845,7 +17845,7 @@ impl NoteStoreGetSyncStateResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetFilteredSyncChunkArgs {
+pub struct NoteStoreGetFilteredSyncChunkArgs {
   authentication_token: String,
   after_u_s_n: i32,
   max_entries: i32,
@@ -17926,7 +17926,7 @@ impl NoteStoreGetFilteredSyncChunkArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetFilteredSyncChunkResult {
+pub struct NoteStoreGetFilteredSyncChunkResult {
   result_value: Option<SyncChunk>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18017,7 +18017,7 @@ impl NoteStoreGetFilteredSyncChunkResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetLinkedNotebookSyncStateArgs {
+pub struct NoteStoreGetLinkedNotebookSyncStateArgs {
   authentication_token: String,
   linked_notebook: types::LinkedNotebook,
 }
@@ -18076,7 +18076,7 @@ impl NoteStoreGetLinkedNotebookSyncStateArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetLinkedNotebookSyncStateResult {
+pub struct NoteStoreGetLinkedNotebookSyncStateResult {
   result_value: Option<SyncState>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18181,7 +18181,7 @@ impl NoteStoreGetLinkedNotebookSyncStateResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetLinkedNotebookSyncChunkArgs {
+pub struct NoteStoreGetLinkedNotebookSyncChunkArgs {
   authentication_token: String,
   linked_notebook: types::LinkedNotebook,
   after_u_s_n: i32,
@@ -18273,7 +18273,7 @@ impl NoteStoreGetLinkedNotebookSyncChunkArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetLinkedNotebookSyncChunkResult {
+pub struct NoteStoreGetLinkedNotebookSyncChunkResult {
   result_value: Option<SyncChunk>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18378,7 +18378,7 @@ impl NoteStoreGetLinkedNotebookSyncChunkResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListNotebooksArgs {
+pub struct NoteStoreListNotebooksArgs {
   authentication_token: String,
 }
 
@@ -18527,7 +18527,7 @@ impl NoteStoreListNotebooksResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListAccessibleBusinessNotebooksArgs {
+pub struct NoteStoreListAccessibleBusinessNotebooksArgs {
   authentication_token: String,
 }
 
@@ -18575,7 +18575,7 @@ impl NoteStoreListAccessibleBusinessNotebooksArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListAccessibleBusinessNotebooksResult {
+pub struct NoteStoreListAccessibleBusinessNotebooksResult {
   result_value: Option<Vec<types::Notebook>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18676,7 +18676,7 @@ impl NoteStoreListAccessibleBusinessNotebooksResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNotebookArgs {
+pub struct NoteStoreGetNotebookArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -18735,7 +18735,7 @@ impl NoteStoreGetNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNotebookResult {
+pub struct NoteStoreGetNotebookResult {
   result_value: Option<types::Notebook>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18840,7 +18840,7 @@ impl NoteStoreGetNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetDefaultNotebookArgs {
+pub struct NoteStoreGetDefaultNotebookArgs {
   authentication_token: String,
 }
 
@@ -18888,7 +18888,7 @@ impl NoteStoreGetDefaultNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetDefaultNotebookResult {
+pub struct NoteStoreGetDefaultNotebookResult {
   result_value: Option<types::Notebook>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -18979,7 +18979,7 @@ impl NoteStoreGetDefaultNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateNotebookArgs {
+pub struct NoteStoreCreateNotebookArgs {
   authentication_token: String,
   notebook: types::Notebook,
 }
@@ -19038,7 +19038,7 @@ impl NoteStoreCreateNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateNotebookResult {
+pub struct NoteStoreCreateNotebookResult {
   result_value: Option<types::Notebook>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19143,7 +19143,7 @@ impl NoteStoreCreateNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNotebookArgs {
+pub struct NoteStoreUpdateNotebookArgs {
   authentication_token: String,
   notebook: types::Notebook,
 }
@@ -19202,7 +19202,7 @@ impl NoteStoreUpdateNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNotebookResult {
+pub struct NoteStoreUpdateNotebookResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19307,7 +19307,7 @@ impl NoteStoreUpdateNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeNotebookArgs {
+pub struct NoteStoreExpungeNotebookArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -19366,7 +19366,7 @@ impl NoteStoreExpungeNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeNotebookResult {
+pub struct NoteStoreExpungeNotebookResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19471,7 +19471,7 @@ impl NoteStoreExpungeNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListTagsArgs {
+pub struct NoteStoreListTagsArgs {
   authentication_token: String,
 }
 
@@ -19519,7 +19519,7 @@ impl NoteStoreListTagsArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListTagsResult {
+pub struct NoteStoreListTagsResult {
   result_value: Option<Vec<types::Tag>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19620,7 +19620,7 @@ impl NoteStoreListTagsResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListTagsByNotebookArgs {
+pub struct NoteStoreListTagsByNotebookArgs {
   authentication_token: String,
   notebook_guid: types::Guid,
 }
@@ -19679,7 +19679,7 @@ impl NoteStoreListTagsByNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListTagsByNotebookResult {
+pub struct NoteStoreListTagsByNotebookResult {
   result_value: Option<Vec<types::Tag>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19794,7 +19794,7 @@ impl NoteStoreListTagsByNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetTagArgs {
+pub struct NoteStoreGetTagArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -19853,7 +19853,7 @@ impl NoteStoreGetTagArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetTagResult {
+pub struct NoteStoreGetTagResult {
   result_value: Option<types::Tag>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -19958,7 +19958,7 @@ impl NoteStoreGetTagResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateTagArgs {
+pub struct NoteStoreCreateTagArgs {
   authentication_token: String,
   tag: types::Tag,
 }
@@ -20017,7 +20017,7 @@ impl NoteStoreCreateTagArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateTagResult {
+pub struct NoteStoreCreateTagResult {
   result_value: Option<types::Tag>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -20122,7 +20122,7 @@ impl NoteStoreCreateTagResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateTagArgs {
+pub struct NoteStoreUpdateTagArgs {
   authentication_token: String,
   tag: types::Tag,
 }
@@ -20181,7 +20181,7 @@ impl NoteStoreUpdateTagArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateTagResult {
+pub struct NoteStoreUpdateTagResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -20286,7 +20286,7 @@ impl NoteStoreUpdateTagResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUntagAllArgs {
+pub struct NoteStoreUntagAllArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -20345,7 +20345,7 @@ impl NoteStoreUntagAllArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUntagAllResult {
+pub struct NoteStoreUntagAllResult {
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -20429,7 +20429,7 @@ impl NoteStoreUntagAllResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeTagArgs {
+pub struct NoteStoreExpungeTagArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -20488,7 +20488,7 @@ impl NoteStoreExpungeTagArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeTagResult {
+pub struct NoteStoreExpungeTagResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -20593,7 +20593,7 @@ impl NoteStoreExpungeTagResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListSearchesArgs {
+pub struct NoteStoreListSearchesArgs {
   authentication_token: String,
 }
 
@@ -20641,7 +20641,7 @@ impl NoteStoreListSearchesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListSearchesResult {
+pub struct NoteStoreListSearchesResult {
   result_value: Option<Vec<types::SavedSearch>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -20742,7 +20742,7 @@ impl NoteStoreListSearchesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSearchArgs {
+pub struct NoteStoreGetSearchArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -20801,7 +20801,7 @@ impl NoteStoreGetSearchArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSearchResult {
+pub struct NoteStoreGetSearchResult {
   result_value: Option<types::SavedSearch>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -20906,7 +20906,7 @@ impl NoteStoreGetSearchResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateSearchArgs {
+pub struct NoteStoreCreateSearchArgs {
   authentication_token: String,
   search: types::SavedSearch,
 }
@@ -20965,7 +20965,7 @@ impl NoteStoreCreateSearchArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateSearchResult {
+pub struct NoteStoreCreateSearchResult {
   result_value: Option<types::SavedSearch>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21056,7 +21056,7 @@ impl NoteStoreCreateSearchResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateSearchArgs {
+pub struct NoteStoreUpdateSearchArgs {
   authentication_token: String,
   search: types::SavedSearch,
 }
@@ -21115,7 +21115,7 @@ impl NoteStoreUpdateSearchArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateSearchResult {
+pub struct NoteStoreUpdateSearchResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21220,7 +21220,7 @@ impl NoteStoreUpdateSearchResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeSearchArgs {
+pub struct NoteStoreExpungeSearchArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -21279,7 +21279,7 @@ impl NoteStoreExpungeSearchArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeSearchResult {
+pub struct NoteStoreExpungeSearchResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21384,7 +21384,7 @@ impl NoteStoreExpungeSearchResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNoteOffsetArgs {
+pub struct NoteStoreFindNoteOffsetArgs {
   authentication_token: String,
   filter: NoteFilter,
   guid: types::Guid,
@@ -21454,7 +21454,7 @@ impl NoteStoreFindNoteOffsetArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNoteOffsetResult {
+pub struct NoteStoreFindNoteOffsetResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21559,7 +21559,7 @@ impl NoteStoreFindNoteOffsetResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNotesMetadataArgs {
+pub struct NoteStoreFindNotesMetadataArgs {
   authentication_token: String,
   filter: NoteFilter,
   offset: i32,
@@ -21651,7 +21651,7 @@ impl NoteStoreFindNotesMetadataArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNotesMetadataResult {
+pub struct NoteStoreFindNotesMetadataResult {
   result_value: Option<NotesMetadataList>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21756,7 +21756,7 @@ impl NoteStoreFindNotesMetadataResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNoteCountsArgs {
+pub struct NoteStoreFindNoteCountsArgs {
   authentication_token: String,
   filter: NoteFilter,
   with_trash: bool,
@@ -21826,7 +21826,7 @@ impl NoteStoreFindNoteCountsArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindNoteCountsResult {
+pub struct NoteStoreFindNoteCountsResult {
   result_value: Option<NoteCollectionCounts>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -21931,7 +21931,7 @@ impl NoteStoreFindNoteCountsResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteWithResultSpecArgs {
+pub struct NoteStoreGetNoteWithResultSpecArgs {
   authentication_token: String,
   guid: types::Guid,
   result_spec: NoteResultSpec,
@@ -22001,7 +22001,7 @@ impl NoteStoreGetNoteWithResultSpecArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteWithResultSpecResult {
+pub struct NoteStoreGetNoteWithResultSpecResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -22106,7 +22106,7 @@ impl NoteStoreGetNoteWithResultSpecResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteArgs {
+pub struct NoteStoreGetNoteArgs {
   authentication_token: String,
   guid: types::Guid,
   with_content: bool,
@@ -22209,7 +22209,7 @@ impl NoteStoreGetNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteResult {
+pub struct NoteStoreGetNoteResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -22314,7 +22314,7 @@ impl NoteStoreGetNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteApplicationDataArgs {
+pub struct NoteStoreGetNoteApplicationDataArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -22373,7 +22373,7 @@ impl NoteStoreGetNoteApplicationDataArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteApplicationDataResult {
+pub struct NoteStoreGetNoteApplicationDataResult {
   result_value: Option<types::LazyMap>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -22478,7 +22478,7 @@ impl NoteStoreGetNoteApplicationDataResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteApplicationDataEntryArgs {
+pub struct NoteStoreGetNoteApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -22548,7 +22548,7 @@ impl NoteStoreGetNoteApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteApplicationDataEntryResult {
+pub struct NoteStoreGetNoteApplicationDataEntryResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -22653,7 +22653,7 @@ impl NoteStoreGetNoteApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetNoteApplicationDataEntryArgs {
+pub struct NoteStoreSetNoteApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -22734,7 +22734,7 @@ impl NoteStoreSetNoteApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetNoteApplicationDataEntryResult {
+pub struct NoteStoreSetNoteApplicationDataEntryResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -22839,7 +22839,7 @@ impl NoteStoreSetNoteApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUnsetNoteApplicationDataEntryArgs {
+pub struct NoteStoreUnsetNoteApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -22909,7 +22909,7 @@ impl NoteStoreUnsetNoteApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUnsetNoteApplicationDataEntryResult {
+pub struct NoteStoreUnsetNoteApplicationDataEntryResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23014,7 +23014,7 @@ impl NoteStoreUnsetNoteApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteContentArgs {
+pub struct NoteStoreGetNoteContentArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -23073,7 +23073,7 @@ impl NoteStoreGetNoteContentArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteContentResult {
+pub struct NoteStoreGetNoteContentResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23178,7 +23178,7 @@ impl NoteStoreGetNoteContentResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteSearchTextArgs {
+pub struct NoteStoreGetNoteSearchTextArgs {
   authentication_token: String,
   guid: types::Guid,
   note_only: bool,
@@ -23259,7 +23259,7 @@ impl NoteStoreGetNoteSearchTextArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteSearchTextResult {
+pub struct NoteStoreGetNoteSearchTextResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23364,7 +23364,7 @@ impl NoteStoreGetNoteSearchTextResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceSearchTextArgs {
+pub struct NoteStoreGetResourceSearchTextArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -23423,7 +23423,7 @@ impl NoteStoreGetResourceSearchTextArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceSearchTextResult {
+pub struct NoteStoreGetResourceSearchTextResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23528,7 +23528,7 @@ impl NoteStoreGetResourceSearchTextResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteTagNamesArgs {
+pub struct NoteStoreGetNoteTagNamesArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -23587,7 +23587,7 @@ impl NoteStoreGetNoteTagNamesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteTagNamesResult {
+pub struct NoteStoreGetNoteTagNamesResult {
   result_value: Option<Vec<String>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23702,7 +23702,7 @@ impl NoteStoreGetNoteTagNamesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateNoteArgs {
+pub struct NoteStoreCreateNoteArgs {
   authentication_token: String,
   note: types::Note,
 }
@@ -23761,7 +23761,7 @@ impl NoteStoreCreateNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateNoteResult {
+pub struct NoteStoreCreateNoteResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -23866,7 +23866,7 @@ impl NoteStoreCreateNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNoteArgs {
+pub struct NoteStoreUpdateNoteArgs {
   authentication_token: String,
   note: types::Note,
 }
@@ -23925,7 +23925,7 @@ impl NoteStoreUpdateNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNoteResult {
+pub struct NoteStoreUpdateNoteResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24030,7 +24030,7 @@ impl NoteStoreUpdateNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreDeleteNoteArgs {
+pub struct NoteStoreDeleteNoteArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -24089,7 +24089,7 @@ impl NoteStoreDeleteNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreDeleteNoteResult {
+pub struct NoteStoreDeleteNoteResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24194,7 +24194,7 @@ impl NoteStoreDeleteNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeNoteArgs {
+pub struct NoteStoreExpungeNoteArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -24253,7 +24253,7 @@ impl NoteStoreExpungeNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeNoteResult {
+pub struct NoteStoreExpungeNoteResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24358,7 +24358,7 @@ impl NoteStoreExpungeNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCopyNoteArgs {
+pub struct NoteStoreCopyNoteArgs {
   authentication_token: String,
   note_guid: types::Guid,
   to_notebook_guid: types::Guid,
@@ -24428,7 +24428,7 @@ impl NoteStoreCopyNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCopyNoteResult {
+pub struct NoteStoreCopyNoteResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24533,7 +24533,7 @@ impl NoteStoreCopyNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListNoteVersionsArgs {
+pub struct NoteStoreListNoteVersionsArgs {
   authentication_token: String,
   note_guid: types::Guid,
 }
@@ -24592,7 +24592,7 @@ impl NoteStoreListNoteVersionsArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListNoteVersionsResult {
+pub struct NoteStoreListNoteVersionsResult {
   result_value: Option<Vec<NoteVersionId>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24707,7 +24707,7 @@ impl NoteStoreListNoteVersionsResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteVersionArgs {
+pub struct NoteStoreGetNoteVersionArgs {
   authentication_token: String,
   note_guid: types::Guid,
   update_sequence_num: i32,
@@ -24810,7 +24810,7 @@ impl NoteStoreGetNoteVersionArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNoteVersionResult {
+pub struct NoteStoreGetNoteVersionResult {
   result_value: Option<types::Note>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -24915,7 +24915,7 @@ impl NoteStoreGetNoteVersionResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceArgs {
+pub struct NoteStoreGetResourceArgs {
   authentication_token: String,
   guid: types::Guid,
   with_data: bool,
@@ -25018,7 +25018,7 @@ impl NoteStoreGetResourceArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceResult {
+pub struct NoteStoreGetResourceResult {
   result_value: Option<types::Resource>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25123,7 +25123,7 @@ impl NoteStoreGetResourceResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceApplicationDataArgs {
+pub struct NoteStoreGetResourceApplicationDataArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -25182,7 +25182,7 @@ impl NoteStoreGetResourceApplicationDataArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceApplicationDataResult {
+pub struct NoteStoreGetResourceApplicationDataResult {
   result_value: Option<types::LazyMap>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25287,7 +25287,7 @@ impl NoteStoreGetResourceApplicationDataResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceApplicationDataEntryArgs {
+pub struct NoteStoreGetResourceApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -25357,7 +25357,7 @@ impl NoteStoreGetResourceApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceApplicationDataEntryResult {
+pub struct NoteStoreGetResourceApplicationDataEntryResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25462,7 +25462,7 @@ impl NoteStoreGetResourceApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetResourceApplicationDataEntryArgs {
+pub struct NoteStoreSetResourceApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -25543,7 +25543,7 @@ impl NoteStoreSetResourceApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetResourceApplicationDataEntryResult {
+pub struct NoteStoreSetResourceApplicationDataEntryResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25648,7 +25648,7 @@ impl NoteStoreSetResourceApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUnsetResourceApplicationDataEntryArgs {
+pub struct NoteStoreUnsetResourceApplicationDataEntryArgs {
   authentication_token: String,
   guid: types::Guid,
   key: String,
@@ -25718,7 +25718,7 @@ impl NoteStoreUnsetResourceApplicationDataEntryArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUnsetResourceApplicationDataEntryResult {
+pub struct NoteStoreUnsetResourceApplicationDataEntryResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25823,7 +25823,7 @@ impl NoteStoreUnsetResourceApplicationDataEntryResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateResourceArgs {
+pub struct NoteStoreUpdateResourceArgs {
   authentication_token: String,
   resource: types::Resource,
 }
@@ -25882,7 +25882,7 @@ impl NoteStoreUpdateResourceArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateResourceResult {
+pub struct NoteStoreUpdateResourceResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -25987,7 +25987,7 @@ impl NoteStoreUpdateResourceResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceDataArgs {
+pub struct NoteStoreGetResourceDataArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -26046,7 +26046,7 @@ impl NoteStoreGetResourceDataArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceDataResult {
+pub struct NoteStoreGetResourceDataResult {
   result_value: Option<Vec<u8>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -26151,7 +26151,7 @@ impl NoteStoreGetResourceDataResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceByHashArgs {
+pub struct NoteStoreGetResourceByHashArgs {
   authentication_token: String,
   note_guid: types::Guid,
   content_hash: Vec<u8>,
@@ -26254,7 +26254,7 @@ impl NoteStoreGetResourceByHashArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceByHashResult {
+pub struct NoteStoreGetResourceByHashResult {
   result_value: Option<types::Resource>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -26359,7 +26359,7 @@ impl NoteStoreGetResourceByHashResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceRecognitionArgs {
+pub struct NoteStoreGetResourceRecognitionArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -26418,7 +26418,7 @@ impl NoteStoreGetResourceRecognitionArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceRecognitionResult {
+pub struct NoteStoreGetResourceRecognitionResult {
   result_value: Option<Vec<u8>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -26523,7 +26523,7 @@ impl NoteStoreGetResourceRecognitionResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceAlternateDataArgs {
+pub struct NoteStoreGetResourceAlternateDataArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -26582,7 +26582,7 @@ impl NoteStoreGetResourceAlternateDataArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceAlternateDataResult {
+pub struct NoteStoreGetResourceAlternateDataResult {
   result_value: Option<Vec<u8>>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -26687,7 +26687,7 @@ impl NoteStoreGetResourceAlternateDataResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceAttributesArgs {
+pub struct NoteStoreGetResourceAttributesArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -26746,7 +26746,7 @@ impl NoteStoreGetResourceAttributesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetResourceAttributesResult {
+pub struct NoteStoreGetResourceAttributesResult {
   result_value: Option<types::ResourceAttributes>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -26851,7 +26851,7 @@ impl NoteStoreGetResourceAttributesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetPublicNotebookArgs {
+pub struct NoteStoreGetPublicNotebookArgs {
   user_id: types::UserID,
   public_uri: String,
 }
@@ -26910,7 +26910,7 @@ impl NoteStoreGetPublicNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetPublicNotebookResult {
+pub struct NoteStoreGetPublicNotebookResult {
   result_value: Option<types::Notebook>,
   system_exception: Option<errors::EDAMSystemException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27001,7 +27001,7 @@ impl NoteStoreGetPublicNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreShareNotebookArgs {
+pub struct NoteStoreShareNotebookArgs {
   authentication_token: String,
   shared_notebook: types::SharedNotebook,
   message: String,
@@ -27071,7 +27071,7 @@ impl NoteStoreShareNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreShareNotebookResult {
+pub struct NoteStoreShareNotebookResult {
   result_value: Option<types::SharedNotebook>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27176,7 +27176,7 @@ impl NoteStoreShareNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateOrUpdateNotebookSharesArgs {
+pub struct NoteStoreCreateOrUpdateNotebookSharesArgs {
   authentication_token: String,
   share_template: NotebookShareTemplate,
 }
@@ -27235,7 +27235,7 @@ impl NoteStoreCreateOrUpdateNotebookSharesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateOrUpdateNotebookSharesResult {
+pub struct NoteStoreCreateOrUpdateNotebookSharesResult {
   result_value: Option<CreateOrUpdateNotebookSharesResult>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27354,7 +27354,7 @@ impl NoteStoreCreateOrUpdateNotebookSharesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateSharedNotebookArgs {
+pub struct NoteStoreUpdateSharedNotebookArgs {
   authentication_token: String,
   shared_notebook: types::SharedNotebook,
 }
@@ -27413,7 +27413,7 @@ impl NoteStoreUpdateSharedNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateSharedNotebookResult {
+pub struct NoteStoreUpdateSharedNotebookResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27518,7 +27518,7 @@ impl NoteStoreUpdateSharedNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetNotebookRecipientSettingsArgs {
+pub struct NoteStoreSetNotebookRecipientSettingsArgs {
   authentication_token: String,
   notebook_guid: String,
   recipient_settings: types::NotebookRecipientSettings,
@@ -27588,7 +27588,7 @@ impl NoteStoreSetNotebookRecipientSettingsArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreSetNotebookRecipientSettingsResult {
+pub struct NoteStoreSetNotebookRecipientSettingsResult {
   result_value: Option<types::Notebook>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27693,7 +27693,7 @@ impl NoteStoreSetNotebookRecipientSettingsResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListSharedNotebooksArgs {
+pub struct NoteStoreListSharedNotebooksArgs {
   authentication_token: String,
 }
 
@@ -27741,7 +27741,7 @@ impl NoteStoreListSharedNotebooksArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListSharedNotebooksResult {
+pub struct NoteStoreListSharedNotebooksResult {
   result_value: Option<Vec<types::SharedNotebook>>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -27856,7 +27856,7 @@ impl NoteStoreListSharedNotebooksResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateLinkedNotebookArgs {
+pub struct NoteStoreCreateLinkedNotebookArgs {
   authentication_token: String,
   linked_notebook: types::LinkedNotebook,
 }
@@ -27915,7 +27915,7 @@ impl NoteStoreCreateLinkedNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreCreateLinkedNotebookResult {
+pub struct NoteStoreCreateLinkedNotebookResult {
   result_value: Option<types::LinkedNotebook>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28020,7 +28020,7 @@ impl NoteStoreCreateLinkedNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateLinkedNotebookArgs {
+pub struct NoteStoreUpdateLinkedNotebookArgs {
   authentication_token: String,
   linked_notebook: types::LinkedNotebook,
 }
@@ -28079,7 +28079,7 @@ impl NoteStoreUpdateLinkedNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateLinkedNotebookResult {
+pub struct NoteStoreUpdateLinkedNotebookResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28184,7 +28184,7 @@ impl NoteStoreUpdateLinkedNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListLinkedNotebooksArgs {
+pub struct NoteStoreListLinkedNotebooksArgs {
   authentication_token: String,
 }
 
@@ -28232,7 +28232,7 @@ impl NoteStoreListLinkedNotebooksArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreListLinkedNotebooksResult {
+pub struct NoteStoreListLinkedNotebooksResult {
   result_value: Option<Vec<types::LinkedNotebook>>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28347,7 +28347,7 @@ impl NoteStoreListLinkedNotebooksResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeLinkedNotebookArgs {
+pub struct NoteStoreExpungeLinkedNotebookArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -28406,7 +28406,7 @@ impl NoteStoreExpungeLinkedNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreExpungeLinkedNotebookResult {
+pub struct NoteStoreExpungeLinkedNotebookResult {
   result_value: Option<i32>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28511,7 +28511,7 @@ impl NoteStoreExpungeLinkedNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreAuthenticateToSharedNotebookArgs {
+pub struct NoteStoreAuthenticateToSharedNotebookArgs {
   share_key_or_global_id: String,
   authentication_token: String,
 }
@@ -28570,7 +28570,7 @@ impl NoteStoreAuthenticateToSharedNotebookArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreAuthenticateToSharedNotebookResult {
+pub struct NoteStoreAuthenticateToSharedNotebookResult {
   result_value: Option<user_store::AuthenticationResult>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28675,7 +28675,7 @@ impl NoteStoreAuthenticateToSharedNotebookResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSharedNotebookByAuthArgs {
+pub struct NoteStoreGetSharedNotebookByAuthArgs {
   authentication_token: String,
 }
 
@@ -28723,7 +28723,7 @@ impl NoteStoreGetSharedNotebookByAuthArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetSharedNotebookByAuthResult {
+pub struct NoteStoreGetSharedNotebookByAuthResult {
   result_value: Option<types::SharedNotebook>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -28828,7 +28828,7 @@ impl NoteStoreGetSharedNotebookByAuthResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreEmailNoteArgs {
+pub struct NoteStoreEmailNoteArgs {
   authentication_token: String,
   parameters: NoteEmailParameters,
 }
@@ -28887,7 +28887,7 @@ impl NoteStoreEmailNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreEmailNoteResult {
+pub struct NoteStoreEmailNoteResult {
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -28971,7 +28971,7 @@ impl NoteStoreEmailNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreShareNoteArgs {
+pub struct NoteStoreShareNoteArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -29030,7 +29030,7 @@ impl NoteStoreShareNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreShareNoteResult {
+pub struct NoteStoreShareNoteResult {
   result_value: Option<String>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -29135,7 +29135,7 @@ impl NoteStoreShareNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreStopSharingNoteArgs {
+pub struct NoteStoreStopSharingNoteArgs {
   authentication_token: String,
   guid: types::Guid,
 }
@@ -29194,7 +29194,7 @@ impl NoteStoreStopSharingNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreStopSharingNoteResult {
+pub struct NoteStoreStopSharingNoteResult {
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -29278,7 +29278,7 @@ impl NoteStoreStopSharingNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreAuthenticateToSharedNoteArgs {
+pub struct NoteStoreAuthenticateToSharedNoteArgs {
   guid: String,
   note_key: String,
   authentication_token: String,
@@ -29348,7 +29348,7 @@ impl NoteStoreAuthenticateToSharedNoteArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreAuthenticateToSharedNoteResult {
+pub struct NoteStoreAuthenticateToSharedNoteResult {
   result_value: Option<user_store::AuthenticationResult>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -29453,7 +29453,7 @@ impl NoteStoreAuthenticateToSharedNoteResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindRelatedArgs {
+pub struct NoteStoreFindRelatedArgs {
   authentication_token: String,
   query: RelatedQuery,
   result_spec: RelatedResultSpec,
@@ -29523,7 +29523,7 @@ impl NoteStoreFindRelatedArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreFindRelatedResult {
+pub struct NoteStoreFindRelatedResult {
   result_value: Option<RelatedResult>,
   user_exception: Option<errors::EDAMUserException>,
   system_exception: Option<errors::EDAMSystemException>,
@@ -29628,7 +29628,7 @@ impl NoteStoreFindRelatedResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNoteIfUsnMatchesArgs {
+pub struct NoteStoreUpdateNoteIfUsnMatchesArgs {
   authentication_token: String,
   note: types::Note,
 }
@@ -29687,7 +29687,7 @@ impl NoteStoreUpdateNoteIfUsnMatchesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreUpdateNoteIfUsnMatchesResult {
+pub struct NoteStoreUpdateNoteIfUsnMatchesResult {
   result_value: Option<UpdateNoteIfUsnMatchesResult>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -29792,7 +29792,7 @@ impl NoteStoreUpdateNoteIfUsnMatchesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreManageNotebookSharesArgs {
+pub struct NoteStoreManageNotebookSharesArgs {
   authentication_token: String,
   parameters: ManageNotebookSharesParameters,
 }
@@ -29851,7 +29851,7 @@ impl NoteStoreManageNotebookSharesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreManageNotebookSharesResult {
+pub struct NoteStoreManageNotebookSharesResult {
   result_value: Option<ManageNotebookSharesResult>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
@@ -29956,7 +29956,7 @@ impl NoteStoreManageNotebookSharesResult {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNotebookSharesArgs {
+pub struct NoteStoreGetNotebookSharesArgs {
   authentication_token: String,
   notebook_guid: String,
 }
@@ -30015,7 +30015,7 @@ impl NoteStoreGetNotebookSharesArgs {
 //
 
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct NoteStoreGetNotebookSharesResult {
+pub struct NoteStoreGetNotebookSharesResult {
   result_value: Option<ShareRelationships>,
   user_exception: Option<errors::EDAMUserException>,
   not_found_exception: Option<errors::EDAMNotFoundException>,
